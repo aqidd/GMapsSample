@@ -122,20 +122,7 @@ public class LocationListActivity extends ListActivity {
 	public LatLng initializeMyLocation() {
 		/* inisialisasi lokasi asal (Pesona Khayangan) */
 		LatLng myLocation = new LatLng(-6.383490, 106.834987);
-
-		/* mengambil lokasi berdasarkan gps : masih error entah kenapa */
-		/* Use the LocationManager class to obtain GPS locations */
-		LocationManager mlocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		LocationListener mlocListener = new MyLocationListener();
-		mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0,
-				mlocListener);
-		Location myLoc = mlocManager
-				.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-		// melakukan update lokasi asal
-		if(myLoc != null){
-			myLocation = new LatLng(myLoc.getLatitude(), myLoc.getLongitude());
-		}
-
+		
 		return myLocation;
 	}
 
@@ -162,33 +149,4 @@ public class LocationListActivity extends ListActivity {
 
 		return locations;
 	}
-
-	/* Class My Location Listener */
-	public class MyLocationListener implements LocationListener {
-		@Override
-		public void onLocationChanged(Location loc) {
-			loc.getLatitude();
-			loc.getLongitude();
-			String Text = "my current location" + "lattitude"
-					+ loc.getLatitude() + "longitude" + loc.getLongitude();
-			Toast.makeText(getApplicationContext(), Text, Toast.LENGTH_SHORT)
-					.show();
-		}
-
-		@Override
-		public void onProviderDisabled(String provider) {
-			Toast.makeText(getApplicationContext(), "gps disabled",
-					Toast.LENGTH_SHORT).show();
-		}
-
-		@Override
-		public void onProviderEnabled(String provider) {
-			Toast.makeText(getApplicationContext(), "gps enabled",
-					Toast.LENGTH_SHORT).show();
-		}
-
-		@Override
-		public void onStatusChanged(String provider, int status, Bundle extras) {
-		}
-	}/* End of Class MyLocationListener */
 }
